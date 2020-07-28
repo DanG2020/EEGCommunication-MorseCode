@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morse Reciever</title>
+    <script src="https://raw.githubusercontent.com/ftlabs/fastclick/master/lib/fastclick.js"></script>
+    <script src="http://cwilso.github.io/AudioContext-MonkeyPatch/AudioContextMonkeyPatch.js"></script>
+    <script type="text/javascript" src="https://code.responsivevoice.org/responsivevoice.js"></script>
+    <script type="text/javascript" src="Breakout.js"></script> 
+    <script src="node_modules/systemjs/dist/system.js"></script> 
+
+    <script>
+        System.config({
+            packages: {
+                'muse-js': {
+                    defaultJSExtensions: true,
+                    main: 'muse.js',
+                },
+                'rxjs': {
+                    defaultJSExtensions: true,
+                }
+            },
+            map: {
+                'rxjs': 'node_modules/rxjs/',
+                'muse-js': 'node_modules/muse-js/dist'
+            }
+        });
+      SystemJS.import('brain.js');
+    </script>
+ <style>
+    @media screen and (max-width: 800px) {
+        .no-highlight {
+            -moz-user-select: -moz-none;
+-khtml-user-select: none;
+-webkit-user-select: none;
+
+/*
+ Introduced in IE 10.
+ See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+*/
+-ms-user-select: none;
+user-select: none;
+        }
+        .bruh {
+            display: block !important;
+            -moz-user-select: -moz-none;
+-khtml-user-select: none;
+-webkit-user-select: none;
+
+/*
+ Introduced in IE 10.
+ See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+*/
+-ms-user-select: none;
+user-select: none;
+        }
+        #full {
+            -moz-user-select: -moz-none;
+-khtml-user-select: none;
+-webkit-user-select: none;
+
+/*
+ Introduced in IE 10.
+ See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+*/
+-ms-user-select: none;
+user-select: none;
+        }
+
+    }
+    .dissapearing {
+        font-family: monospace;
+    }
+    .bruh {
+        display: none;
+        background-color: white;
+        font-size: 20px;
+        font-family: monospace;
+        padding: 20px;
+    }
+    #full {
+        z-index: -10;
+        height: 100vh;
+        width: 100vw;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+
+    }
+    #paddle {
+        padding: 20px;
+        font-size: 20px;
+        font-family: monospace;
+        display: none;
+        border: 2px solid black;
+        text-decoration: none;
+        position: fixed;
+        left: calc(50% - 60px);
+        bottom: 20px;
+        -ms-touch-action: manipulation;	/* IE10  */
+        touch-action: manipulation;		/* IE11+ */
+    }
+</style> 
+</head>
+
+<body>
+  <!--<script type="text/javascript" src="Breakout.js"></script> -->
+<h1 class="dissapearing">How it works:</h1>
+    <h2 class="dissapearing">
+        Press the button and input morse code with any key. <br>
+        Press R to Clear the screen. <br>
+        Timing is based on Farnsworth, with 20 wpm on intra-character speed and 10-15 on inter-character speed and words. <br>
+    </h2>
+    <br class="dissapearing">
+    <button id="start-button" class="dissapearing" style="background-color: white; font-size: 20px; padding: 20px;">Press to Start</button>
+    <br class="dissapearing"><br class="dissapearing">
+    <button id="clear-button" class="bruh">Clear</button>
+    <div id="noting"></div>
+    <div id="full"></div>
+    <div id="container" class="no-highlight" style="font-size: 60px; letter-spacing: -5px; font-family: monospace;"></div>
+    <div id="translated" class="no-highlight" style="font-size: 60px; font-family: monospace;"></div> 
+   <!-- <a id="paddle">Paddle</a> -->
+   <br><br>
+   <style>
+   .button {
+    border: none;
+    color: white;
+    background-color: #4CAF50;
+    padding: 15px 60px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 0px 2px;
+    cursor: pointer;
+  }
+</style>
+<div>
+    <button class = "button" onclick="connectToMuse()"> Connect </button>
+</div>
+
+<br><br>
+
+<img src="Morsereuse.PNG" width = "400" height = "375" alt="Morseimg">
+<br><br>
+
+</body>
+</html>
